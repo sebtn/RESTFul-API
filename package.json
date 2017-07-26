@@ -2,7 +2,7 @@
   "name": "restfulapi",
   "version": "1.0.0",
   "description": "restapi on express and mongo",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/sebtn/RESTFul-API.git"
   },
-  "bugs": {
-    "url": "https://github.com/sebtn/RESTFul-API/issues"
-  },
-  "homepage": "https://github.com/sebtn/RESTFul-API#readme"
+  "dependencies": {
+    "express": "~4.0.0",
+    "mongoose": "~3.6.13",
+    "body-parser": "~1.0.1"
+  }
 }
