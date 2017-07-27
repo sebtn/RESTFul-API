@@ -12,7 +12,6 @@ app.use(bodyParser.json())
 var port = process.env.PORT || 3300 
 
 var mongoose   = require('mongoose');
-// mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o')
 mongoose.connect('mongodb://localhost:/api/api') // create db
 
 /*Routes API*/
@@ -52,6 +51,39 @@ router.route('/bears')
     })
   })
 
+/*-----------------------------------------------------*/
+/*Get a single bear*/
+router.route('/bears/:bear_id')
+
+  .get(function(req, res) {
+    Bear.findById(req.params.bear_id, function(err, bear) {
+      if(err) { res.send(err) }
+      res.json(bear)
+    })
+  })
+
+/*-----------------------------------------------------*/
+ /*Updating*/
+  .put(function(req, res) {
+    Bear.findById(req.params.bear_id, function(err, bear) {
+      if(err) { res.send(err) }
+      bear.name = req.body.name
+
+      bear.save(function(err) {
+        if (err) { res.send(err) }
+        res.json({message: 'Bear Updated!'})
+      })
+    })
+  })
+
+/*-----------------------------------------------------*/
+/*Deleting*/
+  .delete(function(req, res){
+    Bear.remove({_id: req.params.bear_id}, function(err, bear) {
+      if(err) {res.send(err)}
+      res.json({message: "Successful deletion"})
+    })
+  })
 /*-----------------------------------------------------*/
 /*Route Test*/
 router.get('/', function(req, res) {
